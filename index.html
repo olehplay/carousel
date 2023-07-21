@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .slider-container {
+        width: 80%;
+        max-width: 800px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .slider-container {
+        width: 80%;
+        max-width: 800px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .slider {
+        display: flex;
+        transition: transform 0.4s ease;
+      }
+
+      .slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 100%;
+      }
+
+      .slide img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .slider-controls {
+        position: absolute;
+        top: 50%;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .btn {
+        cursor: pointer;
+        line-height: 1;
+        font-size: 18px;
+        font-size: 24px;
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ff8a00;
+        background-color: rgba(30, 38, 53, 0.6);
+        padding: 10px;
+        border-radius: 50%;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .btn:hover,
+      .btn:focus {
+        background-color: rgba(30, 38, 53, 0.4);
+        color: #d27204;
+      }
+
+      .prev-btn {
+        position: absolute;
+        left: 20px;
+        transform: translateY(-50%);
+      }
+
+      .next-btn {
+        position: absolute;
+        right: 20px;
+        transform: translateY(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slide">
+          <!-- Change the value for src attribute -->
+          <img
+            src="https://codefinity-content-media.s3.eu-west-1.amazonaws.com/code-1/node/basics/first-app.png"
+            alt="Image 1"
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://codefinity-content-media.s3.eu-west-1.amazonaws.com/code-1/node/basics/key+features+of+node.png"
+            alt="Image 2"
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://codefinity-content-media.s3.eu-west-1.amazonaws.com/code-1/node/basics/logo-v2.png"
+            alt="Image 3"
+          />
+        </div>
+      </div>
+      <div class="slider-controls">
+        <button class="btn prev-btn">&#8592;</button>
+        <button class="btn next-btn">&#8594;</button>
+      </div>
+    </div>
+
+    <script>
+      const slider = document.querySelector(".slider");
+      const prevBtn = document.querySelector(".prev-btn");
+      const nextBtn = document.querySelector(".next-btn");
+      let currentSlide = 0;
+
+      prevBtn.addEventListener("click", moveToPrevSlide);
+      nextBtn.addEventListener("click", moveToNextSlide);
+
+      function moveToPrevSlide() {
+        currentSlide =
+          (currentSlide - 1 + slider.children.length) % slider.children.length;
+        updateSliderPosition();
+      }
+
+      function moveToNextSlide() {
+        currentSlide = (currentSlide + 1) % slider.children.length;
+        updateSliderPosition();
+      }
+
+      function updateSliderPosition() {
+        const slideWidth = slider.children[0].clientWidth;
+        const translateXValue = -currentSlide * slideWidth;
+        slider.style.transform = `translateX(${translateXValue}px)`;
+      }
+    </script>
+  </body>
+</html>
